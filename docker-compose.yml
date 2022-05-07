@@ -2,7 +2,7 @@ version: "3.8"
 services:
   EventIn:
     container_name: event-in
-    image: dptsi/laravel-web-dev
+    image: mirzaq19/temanhewan-api
     volumes:
       - ./src:/var/www/html
     env_file: .env
@@ -13,7 +13,32 @@ services:
       - "host.docker.internal:host-gateway"
     networks:
       - nginx-proxy-network
+      - event-in
+
+  EventInDB:
+    container_name: event-in-db
+    image: mysql
+    volumes:
+      - ./db:/var/lib/mysql
+    env_file: db.env
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    networks:
+      - event-in
+
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
+    networks:
+      - event-in
 
 networks:
   nginx-proxy-network:
     external: true
+  event-in:
+    driver: bridge
