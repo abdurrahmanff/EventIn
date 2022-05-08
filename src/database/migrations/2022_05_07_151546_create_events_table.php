@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('category_id');
+            $table->foreign('category_id')->references('id')->on('categories');
             $table->foreignId('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('name');
