@@ -18,3 +18,15 @@ Route::get('/', function () {
         "title" => "Homepage"
     ]);
 });
+
+Route::get('login', function () {
+    return view('login', [
+        "title" => "Login page"
+    ]);
+});
+
+Route::get('detail-event', function () {
+    return view('event_detail', [
+        "title" => "Detail Event"
+    ]);
+});
