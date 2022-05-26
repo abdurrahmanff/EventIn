@@ -2,6 +2,22 @@
 
 @section('contents')
 @include('partials.navbar')
+<style>
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+
+  input[type=number]:focus,
+  input[type=number]:active {
+    outline: none;
+  }
+</style>
 <div class="container">
   <div class="row mt-3">
     <div class="col">
@@ -63,25 +79,80 @@
               <img src="/icon/tiket.svg" alt="" class="mb-1">
               <p class="d-inline">Tiket A</p>
             </div>
-            <div class="col text-end">Rp. xx.xxx</div>
+            <div class="col text-end" id="price" data-price="45000">Rp. 45.000</div>
           </div>
-          <div class="row justify-content-end">
-            <input class="col-3" type="number" name="" id="">
+          <div class="d-flex justify-content-end">
+            <img src="/icon/minus.svg" alt="" width="15px" role="button" id="minus-btn">
+            <form>
+              <input type="number" id="item-count" class="mx-1 text-center" value="1" min="0" max="999" required
+                style="border: 0; border-bottom: 1px solid #FF7F0A; width: 30px">
+            </form>
+            <img src="/icon/plus.svg" alt="" width="15px" role="button" id="plus-btn">
           </div>
-          <li class="list-unstyled my-3" style="border-bottom: 1px solid #ACE2FF"></li>
-          <div class="row fw-semibold">
-            <div class="col">
-              <p>Total Harga</p>
-            </div>
-            <div class="col text-end">Rp. xx.xxx</div>
+        </div>
+        <li class="list-unstyled mb-3" style="border-bottom: 1px solid #ACE2FF"></li>
+        <div class="row fw-semibold mx-1">
+          <div class="col">
+            <p>Total Harga</p>
           </div>
-          <div class="d-grid">
-            <button class="btn btn-warning fw-semibold">Beli Sekarang</button>
-          </div>
+          <div class="col text-end" id="total-price">Rp 0</div>
+        </div>
+        <div class="d-grid m-2">
+          <button class="btn btn-warning fw-semibold">Beli Sekarang</button>
         </div>
       </div>
     </div>
   </div>
 </div>
+</div>
+<script>
+  const formatter = new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
+    minimumFractionDigits: 0,
+  })
+
+  function getTotalPrice () {
+    const count = input.value
+    const total = formatter.format(price*count)
+    totalPrice.innerText = total
+  }
+
+  const price = document.getElementById('price').dataset.price
+  const input = document.getElementById('item-count')
+  const totalPrice = document.getElementById('total-price')
+  getTotalPrice()
+  input.addEventListener('input', getTotalPrice)
+  input.addEventListener('input', function(e) {
+    if (input.value < 0) {
+      input.value = 0
+      getTotalPrice()
+    }
+  })
+
+  input.addEventListener('keydown', function(e) {
+    if(!((e.keyCode > 95 && e.keyCode < 106)
+      || (e.keyCode > 47 && e.keyCode < 58) 
+      || e.keyCode == 8)) {
+        e.preventDefault();
+      }
+  })
+  
+  const minusBtn = document.getElementById('minus-btn')
+  const plusBtn = document.getElementById('plus-btn')
+
+  minusBtn.addEventListener('click', function() {
+    if (input.value == 0)
+      return
+    input.value--
+    getTotalPrice()
+  })
+
+  plusBtn.addEventListener('click', function() {
+    input.value++
+    getTotalPrice()
+  })
+
+</script>
 @include('partials.footer')
 @endsection
