@@ -30,3 +30,10 @@ Route::get('detail-event', function () {
         "title" => "Detail Event"
     ]);
 });
+
+
+Route::get('buat-event', function () {
+    return view('make_event', [
+        "title" => "Buat Event"
+    ]);
+});
