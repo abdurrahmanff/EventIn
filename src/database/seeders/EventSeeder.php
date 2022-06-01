@@ -27,6 +27,7 @@ class EventSeeder extends Seeder
                 'desc' => $faker->text(),
                 'schedule' => $faker->dateTime(),
                 'place' => $faker->streetAddress(),
+                'status' => 0,
             ];
         }
 
