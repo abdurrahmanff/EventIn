@@ -19,9 +19,27 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('register', function () {
+    return view('register', [
+        "title" => "Buat Akun"
+    ]);
+});
+
 Route::get('login', function () {
     return view('login', [
-        "title" => "Login page"
+        "title" => "Login"
+    ]);
+});
+
+Route::get('register-eo', function () {
+    return view('register_eo', [
+        "title" => "Buat Akun Event Organizer"
+    ]);
+});
+
+Route::get('login-eo', function () {
+    return view('login_eo', [
+        "title" => "Login Event Organizer"
     ]);
 });
 
