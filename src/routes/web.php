@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,23 +21,13 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('register', function () {
-    return view('register', [
-        "title" => "Buat Akun"
-    ]);
-});
 
-Route::get('login', function () {
-    return view('login', [
-        "title" => "Login"
-    ]);
-});
+Route::get('login', [LoginController::class, 'showLoginForm']);
 
-Route::get('register-eo', function () {
-    return view('register_eo', [
-        "title" => "Buat Akun Event Organizer"
-    ]);
-});
+Route::get('register', [RegisterController::class, 'showRegisterForm']);
+Route::get('register-eo', [RegisterController::class, 'showRegisterEOForm']);
+Route::post('register',[RegisterController::class, 'postRegister']);
+Route::post('register-eo', [RegisterController::class, 'postRegisterEO']);
 
 Route::get('login-eo', function () {
     return view('login_eo', [
