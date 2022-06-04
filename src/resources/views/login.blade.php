@@ -1,6 +1,7 @@
 @extends('layouts.main')
 
 @section('contents')
+@include('partials.navbar')
 <div class="d-flex flex-column align-items-center vh-100">
   <div class="h-100 d-flex align-items-center">
     <div class="card px-2" style="width: 25rem; height: fit-content; background-color: #004E79; color: white">
