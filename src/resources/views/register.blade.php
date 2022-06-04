@@ -1,6 +1,7 @@
 @extends('layouts.main')
 
 @section('contents')
+@include('partials.navbar')
 <div class="d-flex flex-column align-items-center vh-100">
   <div class="h-100 d-flex align-items-center">
     <div class="card px-2" style="width: 25rem; height: fit-content; background-color: #004E79; color: white">
@@ -40,6 +41,7 @@
           @enderror
           <label for="" class="form-label mt-2">Tanggal Lahir</label>
           <input type="date" name="birthDate" class="form-control" placeholder="password">
+          <input type="date" class="form-control" placeholder="password" required>
           <p class="mb-0 mt-1">
             Lupa Password? <a href="#" class="link-warning text-decoration-none">Klik di sini</a>
           </p>
