@@ -55,3 +55,9 @@ Route::get('buat-event', function () {
         "title" => "Buat Event"
     ]);
 });
+
+Route::get('admin', function () {
+    return view('admin_dashboard', [
+        "title" => "Dashboard Admin"
+    ]);
+});
