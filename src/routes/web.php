@@ -23,6 +23,7 @@ Route::get('/', function () {
 
 
 Route::get('login', [LoginController::class, 'showLoginForm']);
+Route::post('login', [LoginController::class, 'login']);
 
 Route::get('register', [RegisterController::class, 'showRegisterForm']);
 Route::get('register-eo', [RegisterController::class, 'showRegisterEOForm']);

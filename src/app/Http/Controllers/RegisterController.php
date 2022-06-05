@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
@@ -18,20 +19,22 @@ class RegisterController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|string|email:dns|max:255|unique:users',
             'phoneNumber' => 'required|string|max:255',
             'password' => 'required|string|min:8|confirmed',
             'birthDate' => 'required|date',
         ]);
 
-        $user = new User;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->password);
-        $user->save();
+        User::create([
+            'name' => $request->name,
+            'role_id' => 3,
+            'email' => $request->email,
+            'password' => Hash::make($request->pasword),
+            'phone_num' => $request->phoneNumber,
+            'birth' => $request->birthDate,
+        ]);
 
-        return redirect()->route('login')->with('message', 'Akun berhasil dibuat. Silahkan login.');
-        return $request->all();
+        return redirect('login')->with('success', 'Akun berhasil dibuat. Silahkan login.');
     }
 
     public function showRegisterEOForm()
