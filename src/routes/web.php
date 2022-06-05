@@ -36,7 +36,7 @@ Route::get('buat-event', function () {
     return view('make_event', [
         "title" => "Buat Event"
     ]);
-});
+})->middleware('auth');
 
 Route::get('admin', function () {
     return view('admin_dashboard', [
