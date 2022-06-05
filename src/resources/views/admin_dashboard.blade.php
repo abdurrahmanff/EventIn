@@ -16,26 +16,32 @@
   </div>
 </nav>
 <div class="container mt-2">
-  <table class="table table-bordered border-secondary">
+  <table class="table table-bordered border-secondary" style="width: 100%">
     <thead>
-      <tr>
-        <th scope="col">No</th>
-        <th scope="col">Nama EO</th>
+      <tr class="text-center">
+        <th scope="col" style="width: 2%">No</th>
+        <th scope="col" style="width: 20%">Nama EO</th>
         <th scope="col">Nama Event</th>
-        <th scope="col">Tanggal</th>
-        <th scope="col">Status</th>
+        <th scope="col" style="width: 15%">Tanggal</th>
+        <th scope="col" style="width: 10%">Status</th>
       </tr>
     </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
+    <tbody class="table-group-divider">
+      @for ($i = 0; $i < 5; $i++) <tr>
+        <th scope="row" class="text-center">{{ $i+1 }}</th>
         <td>Mark</td>
         <td>Otto</td>
         <td>@mdo</td>
         <td>
-          <form action=""></form>
+          <form method="" action="post">
+            <div class="d-flex">
+              <button class="btn btn-success btn-sm text-center mx-auto" style="width: 50px">Acc</button>
+              <button class="btn btn-danger btn-sm text-center mx-auto" style="width: 50px">Deny</button>
+            </div>
+          </form>
         </td>
-      </tr>
+        </tr>
+        @endfor
     </tbody>
   </table>
 </div>
