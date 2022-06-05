@@ -19,9 +19,7 @@ class RoleSeeder extends Seeder
             ['id' => 1,
              'name' => 'admin'],
             ['id' => 2,
-             'name' => 'eo'],
-            ['id' => 3,
-             'name' => 'pub'], 
+             'name' => 'pub'],
         ]);
     }
 }

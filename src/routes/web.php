@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
@@ -15,26 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home', [
-        "title" => "Homepage"
-    ]);
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-
-Route::get('login', [LoginController::class, 'showLoginForm']);
+Route::get('login', [LoginController::class, 'showLoginForm'])->middleware('guest');
 Route::post('login', [LoginController::class, 'login']);
 
 Route::get('register', [RegisterController::class, 'showRegisterForm']);
-Route::get('register-eo', [RegisterController::class, 'showRegisterEOForm']);
 Route::post('register',[RegisterController::class, 'postRegister']);
-Route::post('register-eo', [RegisterController::class, 'postRegisterEO']);
-
-Route::get('login-eo', function () {
-    return view('login_eo', [
-        "title" => "Login Event Organizer"
-    ]);
-});
 
 Route::get('detail-event', function () {
     return view('event_detail', [

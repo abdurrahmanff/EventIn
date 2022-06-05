@@ -13,7 +13,7 @@
         </form>
       </div>
       <div class="col">
-        @if (0)
+        @auth
         <button class="float-end btn btn-sm dropdown-toggle p-0" type="button" id="dropdownMenuButton1"
           data-bs-toggle="dropdown" aria-expanded="false" style="border: 0px">
           <img src=" /img/foto.jpg" class="rounded-circle" alt="Profil" height="30">

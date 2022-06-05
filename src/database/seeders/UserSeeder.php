@@ -39,16 +39,6 @@ class UserSeeder extends Seeder
                 'birth' => $faker->date(
                     max: new Carbon('first day of January 2001')
                 )
-            ],
-            [
-                'role_id' => 3,
-                'name' => $faker->name(),
-                'email' => 'ganteng@richard.gg',
-                'password' => Hash::make('passwordrichard'),
-                'phone_num' => $faker->phoneNumber(),
-                'birth' => $faker->date(
-                    max: new Carbon('first day of January 2001')
-                )
             ]
         ]);
     }

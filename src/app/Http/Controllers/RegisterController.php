@@ -27,7 +27,7 @@ class RegisterController extends Controller
 
         User::create([
             'name' => $request->name,
-            'role_id' => 3,
+            'role_id' => 2,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'phone_num' => $request->phoneNumber,
@@ -35,29 +35,5 @@ class RegisterController extends Controller
         ]);
 
         return redirect('login')->with('success', 'Akun berhasil dibuat. Silahkan login.');
-    }
-
-    public function showRegisterEOForm()
-    {
-        return view('register_eo', [
-            "title" => "Buat Akun Event Organizer"
-        ]);
-    }
-
-    public function postRegisterEO(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
-
-        $user = new User;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->password);
-        $user->save();
-
-        return redirect()->route('login-eo')->with('message', 'Akun berhasil dibuat. Silahkan login.');
     }
 }
