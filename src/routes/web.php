@@ -60,3 +60,9 @@ Route::get('ubah-password', function () {
         "title" => "Ubah Password Saya"
     ]);
 });
+
+Route::get('detail-event/beli-tiket', function () {
+    return view('payment', [
+        "title" => "Pembayaran"
+    ]);
+});
