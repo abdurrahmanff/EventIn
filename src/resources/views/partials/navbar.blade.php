@@ -13,9 +13,20 @@
         </form>
       </div>
       <div class="col">
-        <a href="#">
-          <img src=" /img/foto.jpg" class="rounded-circle float-end" alt="Profil" height="30">
-        </a>
+        <button class="float-end btn btn-sm dropdown-toggle p-0" type="button" id="dropdownMenuButton1"
+          data-bs-toggle="dropdown" aria-expanded="false" style="border: 0px">
+          <img src=" /img/foto.jpg" class="rounded-circle" alt="Profil" height="30">
+        </button>
+        <ul class="dropdown-menu mt-2" aria-labelledby="dropdownMenuButton1">
+          <li><a class="dropdown-item" href="#">Profil</a></li>
+          <li><a class="dropdown-item" href="#">Transaksi</a></li>
+          <li class="list-unstyled my-1" style="border-bottom: 1px solid #ACE2FF"></li>
+          <li>
+            <form action="" method="post">
+              <button class="dropdown-item" href="#">Logout</button>
+            </form>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
