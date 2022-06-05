@@ -53,3 +53,21 @@ Route::get('admin', function () {
         "title" => "Dashboard Admin"
     ]);
 });
+
+Route::get('profil', function(){
+    return view('profile', [
+        "title" => "Profil Saya"
+    ]);
+});
+
+Route::get('ubah-profil', function(){
+    return view('change_profile', [
+        "title" => "Ubah Profil Saya"
+    ]);
+});
+
+Route::get('ubah-password', function () {
+    return view('change_password', [
+        "title" => "Ubah Password Saya"
+    ]);
+});
