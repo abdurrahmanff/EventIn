@@ -13,6 +13,7 @@
         </form>
       </div>
       <div class="col">
+        @if (0)
         <button class="float-end btn btn-sm dropdown-toggle p-0" type="button" id="dropdownMenuButton1"
           data-bs-toggle="dropdown" aria-expanded="false" style="border: 0px">
           <img src=" /img/foto.jpg" class="rounded-circle" alt="Profil" height="30">
@@ -27,6 +28,16 @@
             </form>
           </li>
         </ul>
+        @else
+        <div class="float-end">
+          <a href="/login">
+            <button class="btn py-0 btn-outline-light">Masuk</button>
+          </a>
+          <a href="/register">
+            <button class="btn py-0 btn-outline-light">Daftar</button>
+          </a>
+        </div>
+        @endif
       </div>
     </div>
   </div>
