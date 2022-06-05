@@ -18,8 +18,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('login', [LoginController::class, 'showLoginForm'])->middleware('guest');
+Route::get('login', [LoginController::class, 'showLoginForm'])->name('login')->middleware('guest');
 Route::post('login', [LoginController::class, 'login']);
+Route::post('logout', [LoginController::class, 'logout']);
 
 Route::get('register', [RegisterController::class, 'showRegisterForm'])->middleware('guest');
 Route::post('register',[RegisterController::class, 'postRegister']);
@@ -35,7 +36,7 @@ Route::get('buat-event', function () {
     return view('make_event', [
         "title" => "Buat Event"
     ]);
-});
+})->middleware('auth');
 
 Route::get('admin', function () {
     return view('admin_dashboard', [

@@ -23,8 +23,9 @@
           <li><a class="dropdown-item" href="#">Transaksi</a></li>
           <li class="list-unstyled my-1" style="border-bottom: 1px solid #ACE2FF"></li>
           <li>
-            <form action="" method="post">
-              <button class="dropdown-item" href="#">Logout</button>
+            <form action="/logout" method="post">
+              @csrf
+              <button type="submit" class="dropdown-item" href="#">Logout</button>
             </form>
           </li>
         </ul>
