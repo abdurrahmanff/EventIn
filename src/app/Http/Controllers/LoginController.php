@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -29,12 +31,11 @@ class LoginController extends Controller
 
         if (auth()->attempt(['email' => $request->email, 'password' => $request->password])) {
             $request->session()->regenerate();
-            return redirect()->intended('/home');
+            return redirect()->intended('/');
         }
 
-        return redirect()->back()->withErrors([
-            'failed' => 'Email atau password salah'
-        ]);
+        return redirect()->back()->with(
+            'failed',"Email atau password salah");
     }
 
     public function loginEO(Request $request)
