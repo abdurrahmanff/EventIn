@@ -7,6 +7,8 @@
     ipsam temporibus delectus placeat aliquid nisi enim eius. Culpa aliquid enim non amet repellat omnis aspernatur
     dicta temporibus sapiente?</div>
   <div class="d-grid col mx-auto mt-3" style="width: 89px">
-    <button type="button" class="btn btn-warning btn-sm fw-bold">Buat Event</button>
+    <form action="/buat-event">
+      <button  type="submit" class="btn btn-warning btn-sm fw-bold">Buat Event</button>
+    </form>
   </div>
 </footer>

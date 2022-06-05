@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,18 +26,14 @@ Route::post('logout', [LoginController::class, 'logout']);
 Route::get('register', [RegisterController::class, 'showRegisterForm'])->middleware('guest');
 Route::post('register',[RegisterController::class, 'postRegister']);
 
-Route::get('detail-event', function () {
-    return view('event_detail', [
-        "title" => "Detail Event"
-    ]);
-});
-
-
 Route::get('buat-event', function () {
     return view('make_event', [
         "title" => "Buat Event"
     ]);
 })->middleware('auth');
+Route::post('buat-event', [HomeController::class, 'postEvent']);
+
+Route::get('/{event:id}', [EventController::class, 'event'])->name('detail-event');
 
 Route::get('admin', function () {
     return view('admin_dashboard', [

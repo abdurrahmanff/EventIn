@@ -22,7 +22,7 @@ class EventSeeder extends Seeder
         for ($i=0; $i < 20 ; $i++) { 
             $events[] = [
                 'category_id' => random_int(1, 5),
-                'user_id' => 2,
+                'user_id' => 11,
                 'name' => $faker->name(),
                 'desc' => $faker->text(),
                 'schedule' => $faker->dateTime(),
