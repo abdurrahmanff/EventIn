@@ -37,7 +37,7 @@
             <button class="btn py-0 btn-outline-light">Daftar</button>
           </a>
         </div>
-        @endif
+        @endauth
       </div>
     </div>
   </div>
