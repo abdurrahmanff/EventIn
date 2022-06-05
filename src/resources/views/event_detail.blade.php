@@ -74,21 +74,24 @@
           <p class="d-inline">Lokasi</p></br>
           <li class="list-unstyled my-3" style="border-bottom: 1px solid #ACE2FF"></li>
           <h5 class="fw-bold mb-3">Pesan Sekarang</h5>
+          @foreach ($tickets as $ticket)
           <div class="row fw-semibold">
             <div class="col">
               <img src="/icon/tiket.svg" alt="" class="mb-1">
-              <p class="d-inline">Tiket A</p>
+              <p class="d-inline">{{ $ticket['name'] }}</p>
             </div>
-            <div class="col text-end" id="price" data-price="45000">Rp. 45.000</div>
+            <div class="col text-end prices" {{-- id="price" --}} data-price="{{ $ticket['price'] }}"></div>
           </div>
-          <div class="d-flex justify-content-end">
-            <img src="/icon/minus.svg" alt="" width="15px" role="button" id="minus-btn">
+          <div class="d-flex justify-content-end pb-2 tickets-action">
+            <img src=" /icon/minus.svg" alt="" width="15px" role="button" class="minus-btn">
             <form>
-              <input type="number" id="item-count" class="mx-1 text-center" value="1" min="0" max="999" required
-                style="border: 0; border-bottom: 1px solid #FF7F0A; width: 30px">
+              <input type="number" {{-- id="item-count" --}}class="mx-1 text-center item-counts" value="1" min="0"
+                max="999" required style="border: 0; border-bottom: 1px solid #FF7F0A; width: 30px"
+                data-price="{{ $ticket['price'] }}">
             </form>
-            <img src="/icon/plus.svg" alt="" width="15px" role="button" id="plus-btn">
+            <img src="/icon/plus.svg" alt="" width="15px" role="button" class="plus-btn">
           </div>
+          @endforeach
         </div>
         <li class="list-unstyled mb-3" style="border-bottom: 1px solid #ACE2FF"></li>
         <div class="row fw-semibold mx-1">
@@ -113,46 +116,47 @@
   })
 
   function getTotalPrice () {
-    const count = input.value
-    const total = formatter.format(price*count)
-    totalPrice.innerText = total
+    let sum = 0
+    const inputs = document.querySelectorAll('.item-counts')
+    inputs.forEach(input => {
+      sum += input.value * input.dataset.price
+    });
+    const totalPrice = document.querySelector('#total-price')
+    totalPrice.innerText = formatter.format(sum)
   }
 
-  const price = document.getElementById('price').dataset.price
-  const input = document.getElementById('item-count')
-  const totalPrice = document.getElementById('total-price')
+  const prices = document.querySelectorAll('.prices')
+  prices.forEach(price => {
+    // console.log(price.querySelector('sahf'))
+    price.innerText = formatter.format(price.dataset.price)
+  });
   getTotalPrice()
-  input.addEventListener('input', getTotalPrice)
-  input.addEventListener('input', function(e) {
-    if (input.value < 0) {
-      input.value = 0
+  const actions = document.querySelectorAll('.tickets-action')
+  actions.forEach(action => {
+    // console.log(actions)
+    const input = action.querySelector('input')
+    const minusBtn = action.querySelector('.minus-btn')
+    minusBtn.addEventListener('click', function() {
+      if (input.value == 0)
+        return
+      input.value--
       getTotalPrice()
-    }
-  })
-
-  input.addEventListener('keydown', function(e) {
-    if(!((e.keyCode > 95 && e.keyCode < 106)
-      || (e.keyCode > 47 && e.keyCode < 58) 
-      || e.keyCode == 8)) {
-        e.preventDefault();
+    })
+    const plusBtn = action.querySelector('.plus-btn')
+    plusBtn.addEventListener('click', function() {
+      input.value++
+      getTotalPrice()
+    })
+    input.addEventListener('keydown', function(e) {
+      // console.log(e.keyCode)
+      if ((e.keyCode < 48 || e.keyCode > 57) && (e.keyCode < 96 || e.keyCode > 105) && e.keyCode != 8 && e.keyCode != 46) {
+        e.preventDefault()
       }
-  })
-  
-  const minusBtn = document.getElementById('minus-btn')
-  const plusBtn = document.getElementById('plus-btn')
-
-  minusBtn.addEventListener('click', function() {
-    if (input.value == 0)
-      return
-    input.value--
-    getTotalPrice()
-  })
-
-  plusBtn.addEventListener('click', function() {
-    input.value++
-    getTotalPrice()
-  })
-
+      else {
+        getTotalPrice()
+      }
+    })
+  });
 </script>
 @include('partials.footer')
 @endsection
