@@ -21,7 +21,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('login', [LoginController::class, 'showLoginForm'])->middleware('guest');
 Route::post('login', [LoginController::class, 'login']);
 
-Route::get('register', [RegisterController::class, 'showRegisterForm']);
+Route::get('register', [RegisterController::class, 'showRegisterForm'])->middleware('guest');
 Route::post('register',[RegisterController::class, 'postRegister']);
 
 Route::get('detail-event', function () {
