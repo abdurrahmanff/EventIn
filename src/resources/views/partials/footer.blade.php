@@ -1,4 +1,4 @@
-<footer class="p-3" style="background-color: #004E79">
+<footer id="footer" class="p-3" style="background-color: #004E79">
   <div class="fw-bold text-center">Pen buat event?</div>
   <div class="fw-regular text-break mx-auto" style="width: 497px">Lorem, ipsum dolor sit amet consectetur adipisicing
     elit. Accusantium,
