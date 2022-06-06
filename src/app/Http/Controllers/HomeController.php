@@ -12,10 +12,7 @@ class HomeController extends Controller
         return view('home', [
             "title" => "Home", 
             "events" => Event::with('category')->limit(5)->get(),
-<<<<<<< Updated upstream
-=======
             "categories" => Category::All(),
->>>>>>> Stashed changes
         ]);
     
     }
