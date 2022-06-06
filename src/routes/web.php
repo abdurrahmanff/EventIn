@@ -4,6 +4,9 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\EventController;
+use App\Models\Event;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -33,13 +37,22 @@ Route::get('buat-event', function () {
 })->middleware('auth');
 Route::post('buat-event', [HomeController::class, 'postEvent']);
 
-Route::get('/{event:id}', [EventController::class, 'event'])->name('detail-event');
+Route::get('detail-event/beli-tiket', function () {
+    return view('payment', [
+        "title" => "Pembayaran"
+    ]);
+})->name('beli-tiket');
+Route::get('detail-event/{event:id}', [EventController::class, 'event'])->name('detail_event');
 
 Route::get('admin', function () {
+    if(Auth::user()->role_id != 1){
+        abort(404);
+    }
     return view('admin_dashboard', [
-        "title" => "Dashboard Admin"
+        "title" => "Dashboard Admin",
+        "events" => Event::with('user')->get(),
     ]);
-});
+})->name('admin');
 
 Route::get('profil', function(){
     return view('profile', [
@@ -56,11 +69,5 @@ Route::get('ubah-profil', function(){
 Route::get('ubah-password', function () {
     return view('change_password', [
         "title" => "Ubah Password Saya"
-    ]);
-});
-
-Route::get('detail-event/beli-tiket', function () {
-    return view('payment', [
-        "title" => "Pembayaran"
     ]);
 });

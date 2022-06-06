@@ -9,8 +9,9 @@
       </a>
     </h5>
     <div class="ms-auto">
-      <form action="/admin" method="POST">
-        <button class="btn btn-danger btn-sm">Log Out</button>
+      <form action="/logout" method="POST">
+        @csrf
+        <button type="submit" class="btn btn-danger btn-sm">Log Out</button>
       </form>
     </div>
   </div>
@@ -27,11 +28,11 @@
       </tr>
     </thead>
     <tbody class="table-group-divider">
-      @for ($i = 0; $i < 5; $i++) <tr>
-        <th scope="row" class="text-center">{{ $i+1 }}</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
+      @foreach($events as $event) <tr>
+        <th scope="row" class="text-center">{{ $loop->index+1 }}</th>
+        <td>{{ $event->user->name }}</td>
+        <td>{{ $event->name }}</td>
+        <td>{{ $event->schedule }}</td>
         <td>
           <form method="" action="post">
             <div class="d-flex">
@@ -41,7 +42,7 @@
           </form>
         </td>
         </tr>
-        @endfor
+      @endforeach
     </tbody>
   </table>
 </div>

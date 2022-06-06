@@ -10,7 +10,7 @@ class HomeController extends Controller
     {
         return view('home', [
             "title" => "Home", 
-            "events" => Event::all()
+            "events" => Event::with('category')->get(),
         ]);
     
     }

@@ -20,12 +20,6 @@
                 <option>...</option>
               </select>
             </div>
-            <div class="col">
-              <select class="form-select" id="validationCustom04" required>
-                <option selected disabled value="">Category</option>
-                <option>...</option>
-              </select>
-            </div>
           </div>
           <div class="row pt-4">
             <div class="col">

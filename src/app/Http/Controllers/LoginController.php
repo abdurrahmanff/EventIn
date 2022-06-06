@@ -20,12 +20,16 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'email' => 'required|email:dns',
+            'email' => 'required|email',
             'password' => 'required|min:8'
         ]);
 
         if (auth()->attempt(['email' => $request->email, 'password' => $request->password])) {
             $request->session()->regenerate();
+            // dd(Auth::user());
+            if(Auth::user()->role_id == 1){
+                return redirect()->route('admin');
+            }
             return redirect()->intended('/');
         }
 

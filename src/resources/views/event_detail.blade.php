@@ -24,7 +24,7 @@
       <div class="card p-3 pt-1">
         <h1 class="fw-bold text-center mb-0">{{ $event->name }}</h1>
         <h5 class="fw-semibold text-center">{{ $user}}</h5>
-        <img class="rounded" src="/img/foto.jpg" alt="foto" height="300px">
+        <img class="rounded" src="https://source.unsplash.com/662x300?{{ $event->category->name }}" alt="foto" height="300px">
         <p class="text-justify mt-3">{{ $event->desc }}</p>
       </div>
     </div>
@@ -33,7 +33,7 @@
         <div class="card-body">
           <h5 class="fw-bold mb-3">Diselenggarakan Pada</h5>
           <img src="/icon/tanggal.svg" class="mb-1">
-          <p class="d-inline">dd/mm/yyyy</p></br>
+          <p class="d-inline">{{ date_format($event->schedule, "d/m/Y") }}</p></br>
           <img src="/icon/jam.svg" class="mb-1">
           <p class="d-inline">hh:mm - hh:mm</p></br>
           <img src="/icon/lokasi.svg" class="mb-1">
@@ -66,9 +66,11 @@
           </div>
           <div class="col text-end" id="total-price">Rp 0</div>
         </div>
-        <div class="d-grid m-2">
-          <button class="btn btn-warning fw-semibold">Beli Sekarang</button>
-        </div>
+        <form action="{{ route('beli-tiket') }}" method="get">
+          <div class="d-grid m-2">
+            <button type="submit" class="btn btn-warning fw-semibold">Beli Sekarang</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>

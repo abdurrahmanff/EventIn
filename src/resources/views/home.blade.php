@@ -29,8 +29,8 @@
   @foreach ($events as $event)
     <div class="col">
       <div class="card" style="width: 16rem">
-        <a href={{ $event->id }} class="stretched-link">
-          <img src="/img/foto.jpg" class="card-img-top" alt="event1" style="height: 9rem">
+        <a href="detail-event/{{ $event->id }}" class="stretched-link">
+          <img src="https://source.unsplash.com/254x144?{{ $event->category->name }}" class="card-img-top" alt="event1" style="height: 9rem">
         </a>
         <div class="card-body py-1">
           <p class="my-0">{{ $event->name }}</p>
