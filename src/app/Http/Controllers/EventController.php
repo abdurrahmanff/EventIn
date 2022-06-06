@@ -18,6 +18,7 @@ class EventController extends Controller
         ]);
     }
 
+<<<<<<< Updated upstream
     public function postEvent(Request $request){
         $request->validate([
             'nama_event' => 'required',
@@ -39,5 +40,15 @@ class EventController extends Controller
         // ]);
 
         dd($request);
+=======
+    public function eventlist(){
+        
+        // dd($events->count());
+
+        return view('events',[
+            "title" => "Semua Event",
+            "events" => Event::filter(request(['search', 'category']))->get()
+        ]);
+>>>>>>> Stashed changes
     }
 }

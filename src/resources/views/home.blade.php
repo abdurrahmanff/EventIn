@@ -27,20 +27,9 @@
   <h5>Featured <a href="#" class="fs-6 anchor-link" style="color: #FF7F0A; text-decoration: 0px">Lihat semua</a></h5>
   <div class="row my-3 g-0">
   @foreach ($events as $event)
-    <div class="col">
-      <div class="card" style="width: 16rem">
-        <a href="detail-event/{{ $event->id }}" class="stretched-link">
-          <img src="https://source.unsplash.com/254x144?{{ $event->category->name }}" class="card-img-top" alt="event1" style="height: 9rem">
-        </a>
-        <div class="card-body py-1">
-          <p class="my-0">{{ $event->name }}</p>
-          <p class="my-0 fw-light">{{ $event->schedule }}" "{{ $event->place }}</p>
-          {{-- <p class="my-0 fw-semibold">{{ $event->$ticket-> }}</p> --}}
-        </div>
-      </div>
-    </div>
+    @include('partials.event_card')
   @endforeach
-</div>
+  </div>
 </div>
 <div class="p-3" style="background-color: #1A7DB5">
   <div class="fw-bold text-center">Pen buat event?</div>
@@ -60,10 +49,9 @@
   <h5>Nama Kategori <a href="#" class="fs-6 anchor-link" style="color: #FF7F0A; text-decoration: 0px">Lihat semua</a>
   </h5>
   <div class="row my-3 g-0">
-    @for ($i = 0; $i < 5; $i++) <div class="col">
-      @include('partials.event_card')
-  </div>
-  @endfor
+    @foreach($categories as $category)
+      @include('partials.category_card')
+    @endforeach
 </div>
 </div>
 @include('partials.footer')

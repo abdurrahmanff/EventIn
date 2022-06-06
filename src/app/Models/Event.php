@@ -25,4 +25,17 @@ class Event extends Model
     protected $casts = [
         'schedule' => 'datetime',
     ];
+
+    public function scopeFilter($query, array $filters){
+        $query->when($filters['search'] ?? false, function($query, $search){
+            return $query->where('name', 'like', '%' . request('search') . '%');
+        });
+
+        $query->when($filters['category'] ?? false, function($query, $category){
+            return $query->whereHas('category', function($query) use ($category){
+                $query->where('name', $category);
+            });
+        });
+        
+    }
 }

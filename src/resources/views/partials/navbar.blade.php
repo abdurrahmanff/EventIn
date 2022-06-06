@@ -8,8 +8,11 @@
         </a>
       </div>
       <div class="col mx-auto my-2 my-lg-0" style="width: 300px">
-        <form class="d-flex align-items-center">
-          <input class="form-control form-control-sm" type="search" placeholder="Search" aria-label="Search">
+        <form class="d-flex align-items-center" action="/eventlist">
+          @if(request('category'))
+            <input type="hidden" name="category" value="{{ request('category') }}">
+          @endif
+          <input class="form-control form-control-sm" type="text" placeholder="Search" aria-label="Search" name="search" value="{{ request('search') }}">
         </form>
       </div>
       <div class="col">

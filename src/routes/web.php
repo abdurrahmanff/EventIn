@@ -30,6 +30,7 @@ Route::post('logout', [LoginController::class, 'logout']);
 
 Route::get('register', [RegisterController::class, 'showRegisterForm'])->middleware('guest');
 Route::post('register',[RegisterController::class, 'postRegister']);
+Route::get('eventlist', [EventController::class, 'eventlist']);
 
 Route::get('buat-event', function () {
     return view('make_event', [
@@ -73,3 +74,10 @@ Route::get('ubah-password', function () {
         "title" => "Ubah Password Saya"
     ]);
 });
+
+// Route::get('events', function () {
+//     return view('events',[
+//         "title" => "Semua Event",
+//         "events" => Event::with('category')->get()
+//     ]);
+// });
