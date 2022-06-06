@@ -15,16 +15,16 @@
   min-height: 100vh;
   }
 
-#content-wrap {
-  padding-bottom: 12rem;    /* Footer height */
-  }
+/* #content-wrap { */
+  /* padding-bottom: 12rem;    Footer height */
+  /* } */
 
-#footer {
+/* #footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   height: 12rem;            /* Footer height */
-  }
+  /* } */ */
   </style>
 </head>
 

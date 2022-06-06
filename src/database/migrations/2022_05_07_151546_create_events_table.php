@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('desc');
             $table->dateTime('schedule');
+            $table->dateTime('end_schedule');
             $table->string('img_path')->nullable();
             $table->string('place');
             $table->integer('status');

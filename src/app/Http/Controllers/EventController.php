@@ -17,4 +17,27 @@ class EventController extends Controller
             "user" => User::where('id', $event->user_id)->first()->name
         ]);
     }
+
+    public function postEvent(Request $request){
+        $request->validate([
+            'nama_event' => 'required',
+            'kategori' => 'required',
+            'from_date' => 'date|required',
+            'to_date' => 'date|required',
+            'from_time' => 'required',
+            'to_time' => 'required',
+            'deskripsi_event' => 'required|max:255',
+        ]);
+
+        // Event::create([
+        //     'name' => $request->nama_event,
+        //     'category_id' => $request->kategori,
+        //     'schedule' => $request->from_date . ' ' . $request->from_time,
+        //     'end_schedule' => $request->to_date . ' ' . $request->to_time,
+        //     'description' => $request->deskripsi,
+        //     'user_id' => auth()->user()->id
+        // ]);
+
+        dd($request);
+    }
 }

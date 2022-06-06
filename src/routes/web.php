@@ -4,6 +4,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\EventController;
+use App\Models\Category;
 use App\Models\Event;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -32,10 +33,11 @@ Route::post('register',[RegisterController::class, 'postRegister']);
 
 Route::get('buat-event', function () {
     return view('make_event', [
-        "title" => "Buat Event"
+        "title" => "Buat Event",
+        "categories" => Category::all()
     ]);
 })->middleware('auth');
-Route::post('buat-event', [HomeController::class, 'postEvent']);
+Route::post('buat-event', [EventController::class, 'postEvent']);
 
 Route::get('detail-event/beli-tiket', function () {
     return view('payment', [
