@@ -11,9 +11,9 @@
         <div class="container g-3">
           <div class="row">
             <div class="col">
-              <input name="nama_event" type="text" class="form-control form-control-lg rounded-0 @error('nama_event') @enderror"
+              <input name="name" type="text" class="form-control form-control-lg rounded-0 @error('name') @enderror"
                 style="border:0; border-bottom:1px solid" id="" placeholder="Nama Event" required>
-              @error('nama_event')
+              @error('name')
                 <div class="invalid-feedback">
                   {{ $message }}
                 </div>

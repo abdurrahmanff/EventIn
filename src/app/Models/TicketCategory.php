@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class TicketCategory extends Model
 {
     use HasFactory;
-    public $timestamp = false;
+    public $timestamps = false;
+    
+    protected $guarded = ['id'];
 
     public function event() {
         return $this->belongsTo(Event::class);
