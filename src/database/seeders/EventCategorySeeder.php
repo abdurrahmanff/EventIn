@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Category;
+use App\Models\EventCategory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class CategorySeeder extends Seeder
+class EventCategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,7 +15,7 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        Category::insert([
+        EventCategory::insert([
             ['id' => 1,
              'name' => 'concert'],
             ['id' => 2,
