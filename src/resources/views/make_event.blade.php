@@ -124,7 +124,6 @@
               <button type="submit" class="btn w-100 fw-bold" style="background:#FF7A00;color:white;width:100px">GAS</button>
             </div> 
           </div>
-        </div>
       </div>
     </div>
   </form>
