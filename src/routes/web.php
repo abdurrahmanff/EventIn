@@ -39,6 +39,11 @@ Route::get('buat-event', function () {
     ]);
 })->middleware('auth');
 Route::post('buat-event', [EventController::class, 'postEvent']);
+Route::get('buat-event/buat-tiket', function () {
+    return view('make_ticket_categories', [
+        "title" => "Buat Tiket"
+    ]);
+})->middleware('auth');
 
 Route::get('detail-event/beli-tiket', function () {
     return view('payment', [
