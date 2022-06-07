@@ -9,4 +9,8 @@ class TicketCategory extends Model
 {
     use HasFactory;
     public $timestamp = false;
+
+    public function event() {
+        return $this->belongsTo(Event::class);
+    }
 }

@@ -22,6 +22,10 @@ class Event extends Model
         return $this->belongsTo(EventCategory::class);
     }
 
+    public function tickets() {
+        return $this->hasMany(TicketCategory::class);
+    }
+
     protected $casts = [
         'schedule' => 'datetime',
     ];
