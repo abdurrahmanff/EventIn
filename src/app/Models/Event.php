@@ -10,7 +10,7 @@ class Event extends Model
     use HasFactory;
     public $timestamps = false;
 
-    protected $guarded = ['id', 'user_id'];
+    protected $guarded = ['id'];
 
     public function user()
     {

@@ -6,6 +6,7 @@ use App\Models\Event;
 use App\Models\TicketCategory;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
@@ -19,27 +20,32 @@ class EventController extends Controller
     }
 
     public function postEvent(Request $request){
-        $request->validate([
-            'nama_event' => 'required',
-            'kategori' => 'required',
-            'from_date' => 'date|required',
-            'to_date' => 'date|required',
-            'from_time' => 'required',
-            'to_time' => 'required',
-            'deskripsi_event' => 'required|max:255',
-        ]);
-
-        // Event::create([
-        //     'name' => $request->nama_event,
-        //     'category_id' => $request->kategori,
-        //     'schedule' => $request->from_date . ' ' . $request->from_time,
-        //     'end_schedule' => $request->to_date . ' ' . $request->to_time,
-        //     'description' => $request->deskripsi,
-        //     'user_id' => auth()->user()->id
+        // $request->validate([
+        //     'nama_event' => 'required',
+        //     'kategori' => 'required',
+        //     'from_date' => 'date|required',
+        //     'to_date' => 'date|required',
+        //     'from_time' => 'required',
+        //     'to_time' => 'required',
+        //     'deskripsi_event' => 'required|max:255',
         // ]);
 
-        dd($request);
+        // dd($user_id);
+
+        Event::create([
+            'category_id' => $request->kategori,
+            'user_id' => Auth::user()->id,
+            'name' => $request->nama_event,
+            'schedule' => $request->from_date.' '.$request->from_time.":00",
+            'end_schedule' => $request->to_date.' '.$request->to_time.":00",
+            'desc' => $request->deskripsi_event,
+            'place' => $request->lokasi_event,
+            'status' => 0
+        ]);
+
+        // return redirect('/');
     }
+
     public function eventlist(){
         
         // dd($events->count());

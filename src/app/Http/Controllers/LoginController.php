@@ -26,7 +26,6 @@ class LoginController extends Controller
 
         if (auth()->attempt(['email' => $request->email, 'password' => $request->password])) {
             $request->session()->regenerate();
-            // dd(Auth::user());
             if(Auth::user()->role_id == 1){
                 return redirect()->route('admin');
             }
