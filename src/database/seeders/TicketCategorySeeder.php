@@ -2,12 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\Ticket;
+use App\Models\TicketCategory;
 use Faker\Factory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class TicketSeeder extends Seeder
+class TicketCategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -22,13 +22,13 @@ class TicketSeeder extends Seeder
         for ($i=0; $i < 20; $i++) { 
             $tickets[] = [
                 'event_id' => random_int(1, 20),
-                'name' => random_int(1, 4),
-                'desc' => $faker->text(100),
+                'name' => $faker->text(5),
                 'price' => random_int(1, 10)*10000,
-                'status' => false
+                'status' => false,
+                'count' => random_int(20, 100)
             ];
         }
 
-        Ticket::insert($tickets);
+        TicketCategory::insert($tickets);
     }
 }

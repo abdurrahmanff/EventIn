@@ -13,18 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tickets', function (Blueprint $table) {
+        Schema::create('events', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable();
+            $table->foreignId('category_id');
+            $table->foreign('category_id')->references('id')->on('event_categories');
+            $table->foreignId('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreignId('event_id');
-            $table->foreign('event_id')->references('id')->on('events');
-            $table->foreignId('transaction_id')->nullable();
-            $table->foreign('transaction_id')->references('id')->on('transactions');
             $table->string('name');
             $table->string('desc');
-            $table->float('price');
-            $table->boolean('status');
+            $table->dateTime('schedule');
+            $table->dateTime('end_schedule');
+            $table->string('img_path')->nullable();
+            $table->string('place');
+            $table->integer('status');
         });
     }
 
@@ -35,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tickets');
+        Schema::dropIfExists('events');
     }
 };
