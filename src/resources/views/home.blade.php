@@ -27,7 +27,9 @@
   <h5>Featured <a href="#" class="fs-6 anchor-link" style="color: #FF7F0A; text-decoration: 0px">Lihat semua</a></h5>
   <div class="row my-3 g-0">
   @foreach ($events as $event)
-    @include('partials.event_card')
+    @if($event->status == 1)
+      @include('partials.event_card')
+    @endif
   @endforeach
   </div>
 </div>

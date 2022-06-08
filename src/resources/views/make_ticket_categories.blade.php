@@ -65,8 +65,8 @@
             <p>Berhasil Menambahkan Kategori Tiket!!</p>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tambah Kategori</button>
-            <button type="button" class="btn" style="background-color: #FF7A00;color: white">Sudah GAS</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tambah Kategori Tiket Lagi</button>
+            <a role="button" href="/" class="btn" style="background-color: #FF7A00;color: white">Sudah GAS</a>
         </div>
         </div>
     </div>

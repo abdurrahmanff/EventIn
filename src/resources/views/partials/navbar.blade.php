@@ -24,6 +24,9 @@
         <ul class="dropdown-menu mt-2" aria-labelledby="dropdownMenuButton1">
           <li><a class="dropdown-item" href="#">Profil</a></li>
           <li><a class="dropdown-item" href="#">Transaksi</a></li>
+          @if(Auth::user()->role_id == '1')
+            <li><a class="dropdown-item" href="/admin">Admin</a></li>
+          @endif
           <li class="list-unstyled my-1" style="border-bottom: 1px solid #ACE2FF"></li>
           <li>
             <form action="/logout" method="post">

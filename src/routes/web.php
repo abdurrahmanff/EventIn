@@ -57,6 +57,9 @@ Route::get('admin', function () {
         "events" => Event::with('user')->get(),
     ]);
 })->name('admin');
+Route::post('admin/event/{event:id}/acc', [EventController::class, 'acceptEvent']);
+Route::post('admin/event/{event:id}/deny', [EventController::class, 'rejectEvent']);
+
 
 Route::get('profil', function(){
     return view('profile', [

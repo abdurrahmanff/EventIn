@@ -37,7 +37,7 @@ class EventController extends Controller
         // dd($user_id);
         // dd($request);
         $filename = $request->input('name'). '-' . time(). rand(1,100) . '.jpg';
-        if($request->file('imgae')){
+        if($request->file('image')){
             Storage::disk('public')->putFileAs('event-covers', $request->file('image'), $filename);
         }
 
@@ -83,12 +83,24 @@ class EventController extends Controller
     }
 
     public function eventlist(){
-        
         // dd($events->count());
 
         return view('events',[
             "title" => "Semua Event",
             "events" => Event::filter(request(['search', 'category']))->get()
         ]);
+    }
+
+    public function acceptEvent(Event $event){
+        $event->status = 1;
+        $event->save();
+        return redirect('/admin')->with('success', 'Event berhasil diterima');
+        // dd($event);
+    }
+
+    public function rejectEvent(Event $event){
+        $event->status = 2;
+        $event->save();
+        return redirect('/admin')->with('success', 'Event berhasil ditolak');
     }
 }
