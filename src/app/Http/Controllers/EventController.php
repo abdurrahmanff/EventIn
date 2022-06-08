@@ -30,6 +30,8 @@ class EventController extends Controller
             'to_time' => 'required',
             'image' => 'image',
             'deskripsi_event' => 'required|max:255',
+            'deskripsi_event' => 'required|max:255',
+            'lokasi_event' => 'required|max:255',
         ]);
 
         // dd($user_id);
@@ -70,8 +72,7 @@ class EventController extends Controller
             'count' => $request->jumlah_tiket
         ]);
 
-        return redirect('/');
-        // dd($request->all(), $id);
+        return redirect('/buat-event/'.$id.'/buat-tiket')->with('success', 'Tiket berhasil ditambahkan');
     }
 
     public function eventTicket(Event $event){
