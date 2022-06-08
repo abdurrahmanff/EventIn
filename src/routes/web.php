@@ -73,8 +73,10 @@ Route::get('profil', function(){
     ]);
 });
 Route::get('profil/transaksi', [TransactionController::class, 'getUserTransaction']);
+Route::post('/profil/transaksi/{transaction:id}/upload', [TransactionController::class, 'uploadPaymentProof']);
 
 Route::get('/profil/event', [EventController::class, 'yourEvents']);
+Route::get('profil/event/{event:id}', [TransactionController::class, 'eventUser']);
 
 Route::get('ubah-profil', [ProfileController::class, 'showChangeProfile']);
 

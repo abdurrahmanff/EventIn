@@ -8,6 +8,7 @@ use App\Models\TransactionDetail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class TransactionController extends Controller
 {
@@ -41,9 +42,37 @@ class TransactionController extends Controller
     }
 
     public function getUserTransaction() {
+        $transactions = Transaction::where('user_id', Auth::user()->id)->paginate(10);
         return view('transaction_history',[
             'title' => 'Riwayat Transaksi',
-            'transactions' => Transaction::where('user_id', Auth::user()->id)->paginate(10)
+            'transactions' => $transactions,
+        ]);
+    }
+
+    public function uploadPaymentProof(Request $request, Transaction $transaction) {
+        // dd($request);
+        $request->validate([
+            'img_path' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $filename = $transaction->id.'.jpg';
+        if($request->file('img_path')){
+            Storage::disk('public')->putFileAs('transaction-proof', $request->file('img_path'), $filename);
+        }
+        // dd($filename);
+
+        $transaction->img_path = 'transaction-proof/'.$filename;
+        $transaction->save();
+
+        return redirect()->back()->with('success', 'Upload Proof of Payment Success');
+    }
+
+    public function eventUser(Event $event) {
+        $transactions = Transaction::where('event_id', $event->id)->paginate(10);
+        return view('transaction_history_event',[
+            'title' => 'Riwayat Transaksi',
+            'transactions' => $transactions,
+            'event' => $event,
         ]);
     }
 }

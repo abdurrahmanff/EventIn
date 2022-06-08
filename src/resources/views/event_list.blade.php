@@ -14,6 +14,7 @@
               <th scope="col">Nama Event</th>
               <th scope="col" style="width: 15%">Tanggal</th>
               <th scope="col" style="width: 10%">Status</th>
+              <th scope="col" style="width: 10%">Aksi</th>
             </tr>
           </thead>
           <tbody class="table-group-divider">
@@ -30,6 +31,8 @@
                 <span class="badge bg-danger">Ditolak</span>
                 @endif
               </td>
+              <td>
+                <a href="/profil/event/{{ $event->id }}" class="btn btn-primary">List Pembeli</a>
               </tr>
             @endforeach
           </tbody>
