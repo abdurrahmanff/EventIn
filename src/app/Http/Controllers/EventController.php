@@ -102,7 +102,7 @@ class EventController extends Controller
 
         return view('events',[
             "title" => "Semua Event",
-            "events" => Event::filter(request(['search', 'category']))->where('status', 1)
+            "events" => Event::filter(request(['search', 'category']))->where('status', 1)->get()
         ]);
     }
 
