@@ -49,6 +49,7 @@ Route::get('detail-event/{event:id}', [EventController::class, 'event'])->name('
 Route::post('detail-event/{event:id}/beli-tiket', [EventController::class, 'buyTicket'])->name('beli-tiket');
 
 Route::get('/payment/{transaction:id}', [TransactionController::class, 'getPayment'])->name('payment')->middleware('auth');
+Route::post('/payment/{transaction:id}/confirm', [TransactionController::class, 'confirmPayment'])->middleware('auth');
 
 Route::get('admin', function () {
     if(Auth::user()->role_id != 1){

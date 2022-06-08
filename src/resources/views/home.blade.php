@@ -1,6 +1,14 @@
 @extends('layouts.main')
 @section('contents')
 @include('partials.navbar')
+
+@if(session('success'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  {{ session('success') }}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
+
 <div class="container">
   <div id="carouselExampleControls" class="carousel slide my-4 start-50 translate-middle-x" data-bs-ride="carousel"
     style="width: 50rem">

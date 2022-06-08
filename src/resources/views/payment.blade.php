@@ -11,11 +11,11 @@
           <div class="text-justify mt-3 ms-3">
             <h3>{{ $event->name }}</h3>
             <img src="/icon/tanggal.svg" class="mb-1">
-            <p class="d-inline">dd/mm/yyyy</p></br>
+            <p class="d-inline">{{ $event->name }}</p></br>
             <img src="/icon/jam.svg" class="mb-1">
-            <p class="d-inline">hh:mm - hh:mm</p></br>
+            <p class="d-inline">{{ date('d-m-Y', strtotime($event->schedule)) }} hingga {{ date('d-m-Y', strtotime($event->end_schedule)) }}</p></br>
             <img src="/icon/lokasi.svg" class="mb-1">
-            <p class="d-inline">Lokasi</p></br>
+            <p class="d-inline">{{ $event->place }}</p></br>
           </div>
         </div>
         <li class="list-unstyled my-0" style="border-bottom: 1px solid #ACE2FF"></li>
@@ -29,15 +29,16 @@
             </tr>
           </thead>
           <tbody>
-            @for ($i = 0; $i < 5; $i++) <tr>
+            @foreach($transaction_detail as $ticket)
+            <tr>
               <td><img src="/icon/tiket.svg" alt="" class="mb-1">
-                <p class="d-inline">Tiket {{ $i+1 }}</p>
+                <p class="d-inline">{{ $ticket->ticket_category->name }}</p></td>
               </td>
-              <td class="text-center">Rp. 45.000</td>
-              <td class="text-center">x2</td>
-              <td class="text-end">Rp. 90.000</td>
-              </tr>
-              @endfor
+              <td class="text-center">Rp. {{  $ticket->ticket_category->price }}</td>
+              <td class="text-center">x{{ $ticket->count }}</td>
+              <td class="text-end">Rp. {{ $ticket->ticket_category->price * $ticket->count }}</td>
+            </tr>
+            @endforeach
           </tbody>
         </table>
       </div>
@@ -47,11 +48,11 @@
         <div class="card-body">
           <h5 class="fw-bold mb-3">Diselenggarakan Pada</h5>
           <img src="/icon/tanggal.svg" class="mb-1">
-          <p class="d-inline">dd/mm/yyyy</p></br>
+          <p class="d-inline">{{ date('d-m-Y', strtotime($event->schedule)) }}</p></br>
           <img src="/icon/jam.svg" class="mb-1">
-          <p class="d-inline">hh:mm - hh:mm</p></br>
+          <p class="d-inline">{{ date('H:i', strtotime($event->schedule)) }} - {{ date('H:i', strtotime($event->end_schedule)) }}</p></br>
           <img src="/icon/lokasi.svg" class="mb-1">
-          <p class="d-inline">Lokasi</p></br>
+          <p class="d-inline">{{ $event->place }}</p></br>
           <li class="list-unstyled my-3" style="border-bottom: 1px solid #ACE2FF"></li>
           <h5 class="fw-bold mb-3">Pesan Sekarang</h5>
         </div>
@@ -60,11 +61,14 @@
           <div class="col">
             <p>Total Harga</p>
           </div>
-          <div class="col text-end" id="total-price">Rp 0</div>
+          <div class="col text-end" id="total-price">Rp. {{ $sum }}</div>
         </div>
-        <div class="d-grid m-2">
-          <button class="btn btn-warning fw-semibold">Beli Sekarang</button>
-        </div>
+        <form action="/payment/{{ $transaction->id }}/confirm" method="post">
+        @csrf
+          <div class="d-grid m-2">
+            <button type="submit" class="btn btn-warning fw-semibold">Beli Sekarang</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>

@@ -13,6 +13,12 @@ class Transaction extends Model
     protected $fillable = [
         'user_id',
         'timestamp',
-        'status'
+        'status',
+        'event_id'
     ];
+
+    public function event()
+    {
+        return $this->belongsTo(Event::class);
+    }
 }

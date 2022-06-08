@@ -15,4 +15,14 @@ class TransactionDetail extends Model
         'ticket_category_id',
         'count',
     ];
+
+    public function transaction()
+    {
+        return $this->belongsTo(Transaction::class);
+    }
+
+    public function ticket_category()
+    {
+        return $this->belongsTo(TicketCategory::class);
+    }
 }

@@ -108,6 +108,7 @@ class EventController extends Controller
     }
 
     public function buyTicket(Request $request, $id){
+        // dd($id);
         $transaction = Transaction::create([
             'user_id' => Auth::user()->id,
             'timestamp' => Carbon::now('Asia/Jakarta'),
