@@ -3,7 +3,7 @@
 @section('contents')
 <div class="container">
   <h3 class="fw-bold text-center">Buat <span style="color: #FF7A00">Event</span></h2>
-    <form action="/buat-event" method="post" class="needs-validation">
+    <form action="/buat-event" method="post" class="needs-validation" enctype="multipart/form-data">
       @csrf
     <div class="card start-50 translate-middle-x my-3" style="width: 980px">
       <img src="/img/foto.jpg" class="card-img-top" alt="Upload gambar" height="440px" width="100%">
@@ -86,13 +86,18 @@
                 </div>
               </div>
             </div>
-            {{-- <div class="col">
-              <p class="fw-bold">Organizer</p>
-              <div class="input-group mb-3">
-                <input type="file" class="form-control" id="inputGroupFile02">
-                <label class="input-group-text" for="inputGroupFile02">Upload</label>
+            <div class="col">
+            <div class="mb-3">
+              <label for="image" class="form-label fw-bold">Sampul Event</label>
+              <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image">
+              @error('image')
+                <div class="invalid-feedback">
+                  {{ $message }}
+                </div>
+              @enderror
+            </div>
               </div>
-            </div> --}}
+            </div>
           </div>
           <div class="row pt-4">
             <div class="col">

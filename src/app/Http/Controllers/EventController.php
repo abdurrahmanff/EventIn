@@ -7,6 +7,7 @@ use App\Models\TicketCategory;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class EventController extends Controller
 {
@@ -20,17 +21,23 @@ class EventController extends Controller
     }
 
     public function postEvent(Request $request){
-        // $request->validate([
-        //     'name' => 'required|string|max:255|unique:events',
-        //     'kategori' => 'required',
-        //     'from_date' => 'date|required',
-        //     'to_date' => 'date|required',
-        //     'from_time' => 'required',
-        //     'to_time' => 'required',
-        //     'deskripsi_event' => 'required|max:255',
-        // ]);
+        $request->validate([
+            'name' => 'required|string|max:255|unique:events',
+            'kategori' => 'required',
+            'from_date' => 'date|required',
+            'to_date' => 'date|required',
+            'from_time' => 'required',
+            'to_time' => 'required',
+            'image' => 'image',
+            'deskripsi_event' => 'required|max:255',
+        ]);
 
         // dd($user_id);
+        // dd($request);
+        $filename = $request->input('name'). '-' . time(). rand(1,100) . '.jpg';
+        if($request->file('imgae')){
+            Storage::disk('public')->putFileAs('event-covers', $request->file('image'), $filename);
+        }
 
         Event::create([
             'category_id' => $request->kategori,
@@ -40,6 +47,7 @@ class EventController extends Controller
             'end_schedule' => $request->to_date.' '.$request->to_time.":00",
             'desc' => $request->deskripsi_event,
             'place' => $request->lokasi_event,
+            'img_path' => 'event-covers/' . $filename,
             'status' => 0
         ]);
 

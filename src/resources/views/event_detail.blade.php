@@ -24,7 +24,11 @@
       <div class="card p-3 pt-1">
         <h1 class="fw-bold text-center mb-0">{{ $event->name }}</h1>
         <h5 class="fw-semibold text-center">{{ $user}}</h5>
-        <img class="rounded" src="https://source.unsplash.com/662x300?{{ $event->category->name }}" alt="foto" height="300px">
+        @if ($event->img_path)
+          <img class="rounded" src="{{ asset('storage/' . $event->img_path) }}" alt="foto" height="300px">
+        @else
+          <img class="rounded" src="https://source.unsplash.com/662x300?{{ $event->category->name }}" alt="foto" height="300px">
+        @endif
         <p class="text-justify mt-3">{{ $event->desc }}</p>
       </div>
     </div>
