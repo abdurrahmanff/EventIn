@@ -52,7 +52,7 @@
           @endif
         </td>
         <td>
-          <a href="/admin/event/{{ $event->id }}" class="btn btn-primary btn-sm">Detail</a>
+          <a href="/admin/detail/{{ $event->id }}" class="btn btn-primary btn-sm">Detail</a>
           @if ($event->status == 0)
           <form action="/admin/event/{{ $event->id }}/acc" method="POST">
             @csrf

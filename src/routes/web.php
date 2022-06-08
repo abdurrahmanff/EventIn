@@ -46,7 +46,7 @@ Route::get('buat-event/{event:id}/buat-tiket', [EventController::class, 'eventTi
 Route::post('buat-event/{event:id}/buat-tiket', [EventController::class, 'postTicket']);
 
 Route::get('detail-event/{event:id}', [EventController::class, 'event'])->name('detail_event');
-Route::post('detail-event/{event:id}/beli-tiket', [EventController::class, 'buyTicket'])->name('beli-tiket');
+Route::post('detail-event/{event:id}/beli-tiket', [EventController::class, 'buyTicket'])->name('beli-tiket')->middleware('auth');
 
 Route::get('/payment/{transaction:id}', [TransactionController::class, 'getPayment'])->name('payment')->middleware('auth');
 Route::post('/payment/{transaction:id}/confirm', [TransactionController::class, 'confirmPayment'])->middleware('auth');
@@ -63,6 +63,8 @@ Route::get('admin', function () {
 })->name('admin');
 Route::post('admin/event/{event:id}/acc', [EventController::class, 'acceptEvent']);
 Route::post('admin/event/{event:id}/deny', [EventController::class, 'rejectEvent']);
+
+Route::get('admin/detail/{event:id}', [EventController::class, 'eventAdmin'])->name('admin_detail_event');
 
 
 Route::get('profil', function(){

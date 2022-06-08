@@ -23,6 +23,18 @@ class EventController extends Controller
         ]);
     }
 
+    public function eventAdmin(Event $event){
+        if(Auth::user()->role_id != 1){
+            abort(404);
+        }
+        return view('admin_event_detail', [
+            "title" => "Detail Event (Admin)",
+            "event" => $event,
+            "tickets" => TicketCategory::where('event_id', $event->id)->get(),
+            "user" => User::where('id', $event->user_id)->first()->name
+        ]);
+    }
+
     public function postEvent(Request $request){
         $request->validate([
             'name' => 'required|string|max:255|unique:events',
