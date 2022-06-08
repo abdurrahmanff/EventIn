@@ -25,9 +25,10 @@
         <h1 class="fw-bold text-center mb-0">{{ $event->name }}</h1>
         <h5 class="fw-semibold text-center">{{ $user}}</h5>
         @if ($event->img_path)
-          <img class="rounded" src="{{ asset('storage/' . $event->img_path) }}" alt="foto" height="300px">
+        <img class="rounded" src="{{ asset('storage/' . $event->img_path) }}" alt="foto" height="300px">
         @else
-          <img class="rounded" src="https://source.unsplash.com/662x300?{{ $event->category->name }}" alt="foto" height="300px">
+        <img class="rounded" src="https://source.unsplash.com/662x300?{{ $event->category->name }}" alt="foto"
+          height="300px">
         @endif
         <p class="text-justify mt-3">{{ $event->desc }}</p>
       </div>
@@ -50,33 +51,33 @@
             <div class="row fw-semibold">
               <div class="col">
                 <img src="/icon/tiket.svg" alt="" class="mb-1">
-                <p class="d-inline">{{ $ticket['name'] }}</p>
+                <p class="d-inline">Tiket {{ $ticket['name'] }}</p>
               </div>
               <div class="col text-end prices" {{-- id="price" --}} data-price="{{ $ticket['price'] }}">
               </div>
             </div>
             <div class="d-flex justify-content-end pb-2 tickets-action">
               <img src=" /icon/minus.svg" alt="" width="15px" role="button" class="minus-btn">
-              <input name = '{{ $ticket->name }}' type="number" {{-- id="item-count" --}}class="mx-1 text-center item-counts" value="1" min="0"
-                  max="999" required style="border: 0; border-bottom: 1px solid #FF7F0A; width: 30px"
-                  data-price="{{ $ticket['price'] }}">
+              <input name='{{ $ticket->name }}' type="number" {{-- id="item-count"
+                --}}class="mx-1 text-center item-counts" value="1" min="0" max="999" required
+                style="border: 0; border-bottom: 1px solid #FF7F0A; width: 30px" data-price="{{ $ticket['price'] }}">
               <img src="/icon/plus.svg" alt="" width="15px" role="button" class="plus-btn">
             </div>
             @endforeach
             <li class="list-unstyled mb-3" style="border-bottom: 1px solid #ACE2FF"></li>
-            <div class="row fw-semibold mx-1">
+            <div class="row fw-semibold">
               <div class="col">
                 <p>Total Harga</p>
               </div>
               <div class="col text-end" id="total-price">Rp 0</div>
-              <div class="d-grid m-2">
+              <div class="d-grid">
                 <button type="submit" class="btn btn-warning fw-semibold">Beli Sekarang</button>
-              </div>
               </div>
             </div>
           </div>
         </div>
       </form>
+    </div>
   </div>
 </div>
 <script>

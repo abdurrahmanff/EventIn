@@ -24,7 +24,7 @@
         </button>
         <ul class="dropdown-menu mt-2" aria-labelledby="dropdownMenuButton1">
           <li><a class="dropdown-item" href="/profil">Profil</a></li>
-          <li><a class="dropdown-item" href="/transaksi">Transaksi</a></li>
+          <li><a class="dropdown-item" href="/profil/transaksi">Transaksi</a></li>
           <li><a class="dropdown-item" href="#">Event</a></li>
           @if(Auth::user()->role_id == '1')
           <li><a class="dropdown-item" href="/admin">Admin</a></li>

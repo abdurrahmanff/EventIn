@@ -39,4 +39,11 @@ class TransactionController extends Controller
         $transaction->save();
         return redirect('/')->with('success', 'Payment Success');
     }
+
+    public function getUserTransaction() {
+        return view('transaction_history',[
+            'title' => 'Riwayat Transaksi',
+            'transactions' => Transaction::where('user_id', Auth::user()->id)->paginate(10)
+        ]);
+    }
 }

@@ -90,7 +90,7 @@ class EventController extends Controller
 
         return view('events',[
             "title" => "Semua Event",
-            "events" => Event::filter(request(['search', 'category']))->get()
+            "events" => Event::filter(request(['search', 'category']))->where('status', 1)
         ]);
     }
 
@@ -119,6 +119,8 @@ class EventController extends Controller
         $transactionId = $transaction->id;
         foreach(TicketCategory::where('event_id', $id)->get() as $ticket){
             $name = $ticket->name;
+            // dd($name);
+            // dd($request);
             TransactionDetail::create([
                 'transaction_id' => $transactionId,
                 'ticket_category_id' => $ticket->id,
