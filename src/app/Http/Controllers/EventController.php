@@ -102,7 +102,7 @@ class EventController extends Controller
 
         return view('events',[
             "title" => "Semua Event",
-            "events" => Event::filter(request(['search', 'category']))->get()
+            "events" => Event::filter(request(['search', 'category']))->where('status', 1)
         ]);
     }
 
@@ -131,6 +131,8 @@ class EventController extends Controller
         $transactionId = $transaction->id;
         foreach(TicketCategory::where('event_id', $id)->get() as $ticket){
             $name = $ticket->name;
+            // dd($name);
+            // dd($request);
             TransactionDetail::create([
                 'transaction_id' => $transactionId,
                 'ticket_category_id' => $ticket->id,
@@ -139,5 +141,13 @@ class EventController extends Controller
         }
 
         return redirect('/payment/'.$transactionId);
+    }
+
+    public function yourEvents(){
+        return view('event_list',[
+            'title' => 'Daftar Event',
+            'events' => Event::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->paginate(10)
+            // Event::orderBy('id', 'desc')->paginate(10)
+        ]);
     }
 }

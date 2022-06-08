@@ -21,8 +21,8 @@ class TicketCategorySeeder extends Seeder
 
         for ($i=0; $i < 20; $i++) { 
             $tickets[] = [
-                'event_id' => random_int(1, 20),
-                'name' => $faker->text(5),
+                'event_id' => $i+1,
+                'name' => $faker->word(),
                 'price' => random_int(1, 10)*10000,
                 'count' => random_int(20, 100)
             ];

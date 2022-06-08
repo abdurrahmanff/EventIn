@@ -13,7 +13,8 @@
             <img src="/icon/tanggal.svg" class="mb-1">
             <p class="d-inline">{{ $event->name }}</p></br>
             <img src="/icon/jam.svg" class="mb-1">
-            <p class="d-inline">{{ date('d-m-Y', strtotime($event->schedule)) }} hingga {{ date('d-m-Y', strtotime($event->end_schedule)) }}</p></br>
+            <p class="d-inline">{{ date('d-m-Y', strtotime($event->schedule)) }} hingga {{ date('d-m-Y',
+              strtotime($event->end_schedule)) }}</p></br>
             <img src="/icon/lokasi.svg" class="mb-1">
             <p class="d-inline">{{ $event->place }}</p></br>
           </div>
@@ -32,9 +33,10 @@
             @foreach($transaction_detail as $ticket)
             <tr>
               <td><img src="/icon/tiket.svg" alt="" class="mb-1">
-                <p class="d-inline">{{ $ticket->ticket_category->name }}</p></td>
+                <p class="d-inline">Tiket {{ $ticket->ticket_category->name }}</p>
               </td>
-              <td class="text-center">Rp. {{  $ticket->ticket_category->price }}</td>
+              </td>
+              <td class="text-center">Rp. {{ $ticket->ticket_category->price }}</td>
               <td class="text-center">x{{ $ticket->count }}</td>
               <td class="text-end">Rp. {{ $ticket->ticket_category->price * $ticket->count }}</td>
             </tr>
@@ -50,7 +52,8 @@
           <img src="/icon/tanggal.svg" class="mb-1">
           <p class="d-inline">{{ date('d-m-Y', strtotime($event->schedule)) }}</p></br>
           <img src="/icon/jam.svg" class="mb-1">
-          <p class="d-inline">{{ date('H:i', strtotime($event->schedule)) }} - {{ date('H:i', strtotime($event->end_schedule)) }}</p></br>
+          <p class="d-inline">{{ date('H:i', strtotime($event->schedule)) }} - {{ date('H:i',
+            strtotime($event->end_schedule)) }}</p></br>
           <img src="/icon/lokasi.svg" class="mb-1">
           <p class="d-inline">{{ $event->place }}</p></br>
           <li class="list-unstyled my-3" style="border-bottom: 1px solid #ACE2FF"></li>
@@ -64,7 +67,7 @@
           <div class="col text-end" id="total-price">Rp. {{ $sum }}</div>
         </div>
         <form action="/payment/{{ $transaction->id }}/confirm" method="post">
-        @csrf
+          @csrf
           <div class="d-grid m-2">
             <button type="submit" class="btn btn-warning fw-semibold">Beli Sekarang</button>
           </div>

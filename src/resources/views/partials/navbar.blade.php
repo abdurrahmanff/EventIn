@@ -10,9 +10,10 @@
       <div class="col mx-auto my-2 my-lg-0" style="width: 300px">
         <form class="d-flex align-items-center" action="/eventlist">
           @if(request('category'))
-            <input type="hidden" name="category" value="{{ request('category') }}">
+          <input type="hidden" name="category" value="{{ request('category') }}">
           @endif
-          <input class="form-control form-control-sm" type="text" placeholder="Search" aria-label="Search" name="search" value="{{ request('search') }}">
+          <input class="form-control form-control-sm" type="text" placeholder="Search" aria-label="Search" name="search"
+            value="{{ request('search') }}">
         </form>
       </div>
       <div class="col">
@@ -23,9 +24,10 @@
         </button>
         <ul class="dropdown-menu mt-2" aria-labelledby="dropdownMenuButton1">
           <li><a class="dropdown-item" href="/profil">Profil</a></li>
-          <li><a class="dropdown-item" href="#">Transaksi</a></li>
+          <li><a class="dropdown-item" href="profil/transaksi">Transaksi</a></li>
+          <li><a class="dropdown-item" href="/profil/event">Event</a></li>
           @if(Auth::user()->role_id == '1')
-            <li><a class="dropdown-item" href="/admin">Admin</a></li>
+          <li><a class="dropdown-item" href="/admin">Admin</a></li>
           @endif
           <li class="list-unstyled my-1" style="border-bottom: 1px solid #ACE2FF"></li>
           <li>

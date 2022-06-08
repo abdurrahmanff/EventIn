@@ -45,8 +45,13 @@ Route::post('buat-event', [EventController::class, 'postEvent']);
 Route::get('buat-event/{event:id}/buat-tiket', [EventController::class, 'eventTicket'])->middleware('auth');
 Route::post('buat-event/{event:id}/buat-tiket', [EventController::class, 'postTicket']);
 
+<<<<<<< HEAD
 Route::get('detail-event/{event:id}', [EventController::class, 'event'])->name('detail_event');
 Route::post('detail-event/{event:id}/beli-tiket', [EventController::class, 'buyTicket'])->name('beli-tiket')->middleware('auth');
+=======
+Route::get('/detail-event/{event:id}', [EventController::class, 'event'])->name('detail_event');
+Route::post('/detail-event/{event:id}/beli-tiket', [EventController::class, 'buyTicket'])->name('beli-tiket')->middleware('auth');
+>>>>>>> d1e6975348e343bfddff38c6bcc8c43aa6e9a860
 
 Route::get('/payment/{transaction:id}', [TransactionController::class, 'getPayment'])->name('payment')->middleware('auth');
 Route::post('/payment/{transaction:id}/confirm', [TransactionController::class, 'confirmPayment'])->middleware('auth');
@@ -72,6 +77,9 @@ Route::get('profil', function(){
         "title" => "Profil Saya"
     ]);
 });
+Route::get('profil/transaksi', [TransactionController::class, 'getUserTransaction']);
+
+Route::get('/profil/event', [EventController::class, 'yourEvents']);
 
 Route::get('ubah-profil', [ProfileController::class, 'showChangeProfile']);
 

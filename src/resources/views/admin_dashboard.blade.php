@@ -1,12 +1,6 @@
 @extends('layouts.main')
 
 @section('contents')
-@if(session()->has('success'))
-  <div class="alert alert-success alert-dismissible fade show" role="alert">
-    {{ session('success') }}
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
-@endif
 
 <nav class="sticky-top py-2" style="background-color: #006FAD">
   <div class="container-fluid d-flex">
@@ -23,6 +17,12 @@
     </div>
   </div>
 </nav>
+@if(session()->has('success'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  {{ session('success') }}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
 <div class="container mt-2">
   {{ $events->links() }}
   <table class="table table-bordered border-secondary" style="width: 100%">
@@ -43,11 +43,11 @@
         <td>{{ $event->name }}</td>
         <td>{{ $event->schedule }}</td>
         <td>
-          @if( $event->status  == 0)
+          @if( $event->status == 0)
           <span class="badge bg-warning">Belum Dikonfirmasi</span>
-          @elseif( $event->status  == 1)
+          @elseif( $event->status == 1)
           <span class="badge bg-success">Sudah Dikonfirmasi</span>
-          @elseif( $event->status  == 2)
+          @elseif( $event->status == 2)
           <span class="badge bg-danger">Ditolak</span>
           @endif
         </td>
@@ -64,7 +64,7 @@
           </form>
           @endif
         </td>
-        </tr>
+      </tr>
       @endforeach
     </tbody>
   </table>
