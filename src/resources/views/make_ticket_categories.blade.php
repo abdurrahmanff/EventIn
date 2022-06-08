@@ -1,6 +1,6 @@
 @extends('layouts.main')
-
 @section('contents')
+
 <div class="container">
     <h3 class="fw-bold text-center">Buat <span style="color: #FF7A00">Event</span></h2>
         <form action="/buat-event/{{ $eventId }}/buat-tiket" method="post" class="needs-validation">
@@ -54,7 +54,23 @@
         </form>
     </div>
 </div>
-
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Berhasil</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <p>Berhasil Menambahkan Kategori Tiket!!</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tambah Kategori</button>
+            <button type="button" class="btn" style="background-color: #FF7A00;color: white">Sudah GAS</button>
+        </div>
+        </div>
+    </div>
+</div>
 <footer class="p-3" style="background-color: #004E79">
     <div class="container">
         <div class="row">
@@ -65,4 +81,13 @@
         </div>
     </div>
 </footer>
+
+@if(session()->has('success'))
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+        myModal.show();
+    });
+</script>
+@endif
 @endsection

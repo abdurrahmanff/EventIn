@@ -20,15 +20,16 @@ class EventController extends Controller
     }
 
     public function postEvent(Request $request){
-        // $request->validate([
-        //     'name' => 'required|string|max:255|unique:events',
-        //     'kategori' => 'required',
-        //     'from_date' => 'date|required',
-        //     'to_date' => 'date|required',
-        //     'from_time' => 'required',
-        //     'to_time' => 'required',
-        //     'deskripsi_event' => 'required|max:255',
-        // ]);
+        $request->validate([
+            'name' => 'required|string|max:255|unique:events',
+            'kategori' => 'required',
+            'from_date' => 'date|required',
+            'to_date' => 'date|required',
+            'from_time' => 'required',
+            'to_time' => 'required',
+            'deskripsi_event' => 'required|max:255',
+            'lokasi_event' => 'required|max:255',
+        ]);
 
         // dd($user_id);
 
@@ -62,8 +63,7 @@ class EventController extends Controller
             'count' => $request->jumlah_tiket
         ]);
 
-        return redirect('/');
-        // dd($request->all(), $id);
+        return redirect('/buat-event/'.$id.'/buat-tiket')->with('success', 'Tiket berhasil ditambahkan');
     }
 
     public function eventTicket(Event $event){

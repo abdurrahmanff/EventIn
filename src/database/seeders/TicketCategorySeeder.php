@@ -24,7 +24,6 @@ class TicketCategorySeeder extends Seeder
                 'event_id' => random_int(1, 20),
                 'name' => $faker->text(5),
                 'price' => random_int(1, 10)*10000,
-                'status' => false,
                 'count' => random_int(20, 100)
             ];
         }

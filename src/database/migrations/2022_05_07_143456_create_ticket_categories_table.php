@@ -19,7 +19,6 @@ return new class extends Migration
             $table->foreign('event_id')->references('id')->on('events');
             $table->string('name');
             $table->float('price');
-            $table->boolean('status');
             $table->integer('count');
         });
     }
