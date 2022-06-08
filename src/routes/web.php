@@ -4,8 +4,10 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\ProfileController;
 use App\Models\Event;
 use App\Models\EventCategory;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -67,17 +69,13 @@ Route::get('profil', function(){
     ]);
 });
 
-Route::get('ubah-profil', function(){
-    return view('change_profile', [
-        "title" => "Ubah Profil Saya"
-    ]);
-});
+Route::get('ubah-profil', [ProfileController::class, 'showChangeProfile']);
 
-Route::get('ubah-password', function () {
-    return view('change_password', [
-        "title" => "Ubah Password Saya"
-    ]);
-});
+Route::post('ubah-profil', [ProfileController::class, 'postChangeProfile']);
+
+Route::get('ubah-password', [ProfileController::class, 'showChangePassword']);
+
+Route::post('ubah-password', [ProfileController::class, 'postChangePassword']);
 
 // Route::get('events', function () {
 //     return view('events',[
