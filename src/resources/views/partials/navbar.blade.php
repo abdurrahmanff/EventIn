@@ -22,7 +22,7 @@
           <img src=" /img/foto.jpg" class="rounded-circle" alt="Profil" height="30">
         </button>
         <ul class="dropdown-menu mt-2" aria-labelledby="dropdownMenuButton1">
-          <li><a class="dropdown-item" href="#">Profil</a></li>
+          <li><a class="dropdown-item" href="/profil">Profil</a></li>
           <li><a class="dropdown-item" href="#">Transaksi</a></li>
           @if(Auth::user()->role_id == '1')
             <li><a class="dropdown-item" href="/admin">Admin</a></li>
