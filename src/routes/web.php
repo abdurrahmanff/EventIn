@@ -4,8 +4,10 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\TransactionController;
 use App\Models\Event;
 use App\Models\EventCategory;
+use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -41,12 +43,10 @@ Route::post('buat-event', [EventController::class, 'postEvent']);
 Route::get('buat-event/{event:id}/buat-tiket', [EventController::class, 'eventTicket'])->middleware('auth');
 Route::post('buat-event/{event:id}/buat-tiket', [EventController::class, 'postTicket']);
 
-Route::get('detail-event/beli-tiket', function () {
-    return view('payment', [
-        "title" => "Pembayaran"
-    ]);
-})->name('beli-tiket');
 Route::get('detail-event/{event:id}', [EventController::class, 'event'])->name('detail_event');
+Route::post('detail-event/{event:id}/beli-tiket', [EventController::class, 'buyTicket'])->name('beli-tiket');
+
+Route::get('/payment/{transaction:id}', [TransactionController::class, 'getPayment'])->name('payment')->middleware('auth');
 
 Route::get('admin', function () {
     if(Auth::user()->role_id != 1){
@@ -54,7 +54,8 @@ Route::get('admin', function () {
     }
     return view('admin_dashboard', [
         "title" => "Dashboard Admin",
-        "events" => Event::with('user')->get(),
+        // Get event ordered by id desc
+        "events" => Event::orderBy('id', 'desc')->paginate(10)
     ]);
 })->name('admin');
 Route::post('admin/event/{event:id}/acc', [EventController::class, 'acceptEvent']);

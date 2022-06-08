@@ -18,7 +18,7 @@
     outline: none;
   }
 </style>
-<div class="container">
+<div class="container vh-100">
   <div class="row mt-3">
     <div class="col">
       <div class="card p-3 pt-1">
@@ -33,52 +33,51 @@
       </div>
     </div>
     <div class="col-3 sticky-top" style="height: 50px; top: 63px">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="fw-bold mb-3">Diselenggarakan Pada</h5>
-          <img src="/icon/tanggal.svg" class="mb-1">
-          <p class="d-inline">{{ date_format($event->schedule, "d/m/Y") }}</p></br>
-          <img src="/icon/jam.svg" class="mb-1">
-          <p class="d-inline">hh:mm - hh:mm</p></br>
-          <img src="/icon/lokasi.svg" class="mb-1">
-          <p class="d-inline">Lokasi</p></br>
-          <li class="list-unstyled my-3" style="border-bottom: 1px solid #ACE2FF"></li>
-          <h5 class="fw-bold mb-3">Pesan Sekarang</h5>
-          @foreach ($tickets as $ticket)
-          <div class="row fw-semibold">
-            <div class="col">
-              <img src="/icon/tiket.svg" alt="" class="mb-1">
-              <p class="d-inline">{{ $ticket['name'] }}</p>
+      <form action="/detail-event/{{ $event->id }}/beli-tiket" method="post">
+        @csrf
+        <div class="card">
+          <div class="card-body">
+            <h5 class="fw-bold mb-3">Diselenggarakan Pada</h5>
+            <img src="/icon/tanggal.svg" class="mb-1">
+            <p class="d-inline">{{ date_format($event->schedule, "d/m/Y") }}</p></br>
+            <img src="/icon/jam.svg" class="mb-1">
+            <p class="d-inline">hh:mm - hh:mm</p></br>
+            <img src="/icon/lokasi.svg" class="mb-1">
+            <p class="d-inline">Lokasi</p></br>
+            <li class="list-unstyled my-3" style="border-bottom: 1px solid #ACE2FF"></li>
+            <h5 class="fw-bold mb-3">Pesan Sekarang</h5>
+            @foreach ($tickets as $ticket)
+            <div class="row fw-semibold">
+              <div class="col">
+                <img src="/icon/tiket.svg" alt="" class="mb-1">
+                <p class="d-inline">{{ $ticket['name'] }}</p>
+              </div>
+              <div class="col text-end prices" {{-- id="price" --}} data-price="{{ $ticket['price'] }}">
+              </div>
             </div>
-            <div class="col text-end prices" {{-- id="price" --}} data-price="{{ $ticket['price'] }}"></div>
+            <div class="d-flex justify-content-end pb-2 tickets-action">
+              <img src=" /icon/minus.svg" alt="" width="15px" role="button" class="minus-btn">
+              <input name = '{{ $ticket->name }}' type="number" {{-- id="item-count" --}}class="mx-1 text-center item-counts" value="1" min="0"
+                  max="999" required style="border: 0; border-bottom: 1px solid #FF7F0A; width: 30px"
+                  data-price="{{ $ticket['price'] }}">
+              <img src="/icon/plus.svg" alt="" width="15px" role="button" class="plus-btn">
+            </div>
+            @endforeach
+            <li class="list-unstyled mb-3" style="border-bottom: 1px solid #ACE2FF"></li>
+            <div class="row fw-semibold mx-1">
+              <div class="col">
+                <p>Total Harga</p>
+              </div>
+              <div class="col text-end" id="total-price">Rp 0</div>
+              <div class="d-grid m-2">
+                <button type="submit" class="btn btn-warning fw-semibold">Beli Sekarang</button>
+              </div>
+              </div>
+            </div>
           </div>
-          <div class="d-flex justify-content-end pb-2 tickets-action">
-            <img src=" /icon/minus.svg" alt="" width="15px" role="button" class="minus-btn">
-            <form>
-              <input type="number" {{-- id="item-count" --}}class="mx-1 text-center item-counts" value="1" min="0"
-                max="999" required style="border: 0; border-bottom: 1px solid #FF7F0A; width: 30px"
-                data-price="{{ $ticket['price'] }}">
-            </form>
-            <img src="/icon/plus.svg" alt="" width="15px" role="button" class="plus-btn">
-          </div>
-          @endforeach
         </div>
-        <li class="list-unstyled mb-3" style="border-bottom: 1px solid #ACE2FF"></li>
-        <div class="row fw-semibold mx-1">
-          <div class="col">
-            <p>Total Harga</p>
-          </div>
-          <div class="col text-end" id="total-price">Rp 0</div>
-        </div>
-        <form action="{{ route('beli-tiket') }}" method="get">
-          <div class="d-grid m-2">
-            <button type="submit" class="btn btn-warning fw-semibold">Beli Sekarang</button>
-          </div>
-        </form>
-      </div>
-    </div>
+      </form>
   </div>
-</div>
 </div>
 <script>
   const formatter = new Intl.NumberFormat('id-ID', {
@@ -130,5 +129,6 @@
     })
   });
 </script>
+
 @include('partials.footer')
 @endsection

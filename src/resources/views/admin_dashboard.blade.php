@@ -24,6 +24,7 @@
   </div>
 </nav>
 <div class="container mt-2">
+  {{ $events->links() }}
   <table class="table table-bordered border-secondary" style="width: 100%">
     <thead>
       <tr class="text-center">

@@ -10,7 +10,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $events = Event::with('category')->limit(5)->get();
+        $events = Event::with('category')->where('status', 1)->get();
         // dd($events[0]->tickets->first()->price);
         return view('home', [   
             "title" => "Home", 

@@ -9,7 +9,7 @@
         <div class="d-flex">
           <img class="rounded m-3" src="/img/foto.jpg" alt="foto" height="300px" width="500px">
           <div class="text-justify mt-3 ms-3">
-            <h5>Judul Event</h5>
+            <h3>{{ $event->name }}</h3>
             <img src="/icon/tanggal.svg" class="mb-1">
             <p class="d-inline">dd/mm/yyyy</p></br>
             <img src="/icon/jam.svg" class="mb-1">

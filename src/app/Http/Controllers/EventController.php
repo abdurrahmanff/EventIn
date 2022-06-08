@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use App\Models\TicketCategory;
+use App\Models\Transaction;
+use App\Models\TransactionDetail;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -102,5 +105,26 @@ class EventController extends Controller
         $event->status = 2;
         $event->save();
         return redirect('/admin')->with('success', 'Event berhasil ditolak');
+    }
+
+    public function buyTicket(Request $request, $id){
+        $transaction = Transaction::create([
+            'user_id' => Auth::user()->id,
+            'timestamp' => Carbon::now('Asia/Jakarta'),
+            'status' => 0,
+            'event_id' => $id
+        ]);
+
+        $transactionId = $transaction->id;
+        foreach(TicketCategory::where('event_id', $id)->get() as $ticket){
+            $name = $ticket->name;
+            TransactionDetail::create([
+                'transaction_id' => $transactionId,
+                'ticket_category_id' => $ticket->id,
+                'count' => $request->$name
+            ]);
+        }
+
+        return redirect('/payment/'.$transactionId);
     }
 }
