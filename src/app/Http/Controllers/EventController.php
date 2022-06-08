@@ -130,4 +130,12 @@ class EventController extends Controller
 
         return redirect('/payment/'.$transactionId);
     }
+
+    public function yourEvents(){
+        return view('event_list',[
+            'title' => 'Daftar Event',
+            'events' => Event::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->paginate(10)
+            // Event::orderBy('id', 'desc')->paginate(10)
+        ]);
+    }
 }
