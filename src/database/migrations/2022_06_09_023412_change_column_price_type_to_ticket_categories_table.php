@@ -13,9 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('roles', function (Blueprint $table) {
-            $table->id();
-            $table->string('name', 5);
+        Schema::table('ticket_categories', function (Blueprint $table) {
+            $table->bigInteger('price')->change();
         });
     }
 
@@ -26,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('roles');
+        Schema::table('ticket_categories', function (Blueprint $table) {
+            //
+        });
     }
 };

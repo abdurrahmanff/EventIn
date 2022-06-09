@@ -109,18 +109,18 @@ class EventController extends Controller
     public function acceptEvent(Event $event){
         $event->status = 1;
         $event->save();
-        return redirect('/admin')->with('success', 'Event berhasil diterima');
+        return back()->with('success', 'Event berhasil diterima');
         // dd($event);
     }
 
     public function rejectEvent(Event $event){
         $event->status = 2;
         $event->save();
-        return redirect('/admin')->with('success', 'Event berhasil ditolak');
+        return back()->with('success', 'Event berhasil ditolak');
     }
 
     public function buyTicket(Request $request, $id){
-        // dd($id);
+
         $transaction = Transaction::create([
             'user_id' => Auth::user()->id,
             'timestamp' => Carbon::now('Asia/Jakarta'),
@@ -131,14 +131,13 @@ class EventController extends Controller
         $transactionId = $transaction->id;
         foreach(TicketCategory::where('event_id', $id)->get() as $ticket){
             $name = $ticket->name;
-            // dd($name);
-            // dd($request);
             TransactionDetail::create([
                 'transaction_id' => $transactionId,
                 'ticket_category_id' => $ticket->id,
-                'count' => $request->$name
+                'count' => $request[preg_replace('/\s+/', '_', $name)]
             ]);
         }
+
 
         return redirect('/payment/'.$transactionId);
     }

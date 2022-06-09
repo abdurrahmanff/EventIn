@@ -42,9 +42,9 @@
             <img src="/icon/tanggal.svg" class="mb-1">
             <p class="d-inline">{{ date_format($event->schedule, "d/m/Y") }}</p></br>
             <img src="/icon/jam.svg" class="mb-1">
-            <p class="d-inline">hh:mm - hh:mm</p></br>
+            <p class="d-inline">{{ date('H:i', strtotime($event->schedule)) }} - {{ date('H:i', strtotime($event->end_schedule)) }}</p></br>
             <img src="/icon/lokasi.svg" class="mb-1">
-            <p class="d-inline">Lokasi</p></br>
+            <p class="d-inline">{{ $event->place }}</p></br>
             <li class="list-unstyled my-3" style="border-bottom: 1px solid #ACE2FF"></li>
             <h5 class="fw-bold mb-3">Pesan Sekarang</h5>
             @foreach ($tickets as $ticket)
