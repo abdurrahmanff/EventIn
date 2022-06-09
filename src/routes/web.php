@@ -77,6 +77,8 @@ Route::post('/profil/transaksi/{transaction:id}/upload', [TransactionController:
 
 Route::get('/profil/event', [EventController::class, 'yourEvents']);
 Route::get('profil/event/{event:id}', [TransactionController::class, 'eventUser']);
+Route::post('/profil/event/{transaction:id}/acc', [TransactionController::class, 'acceptTicket']);
+Route::post('/profil/event/{transaction:id}/deny', [TransactionController::class, 'rejectTicket']);
 
 Route::get('ubah-profil', [ProfileController::class, 'showChangeProfile']);
 

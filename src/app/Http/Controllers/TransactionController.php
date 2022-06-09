@@ -36,9 +36,9 @@ class TransactionController extends Controller
     }
 
     public function confirmPayment(Transaction $transaction){
-        $transaction->status = 1;
+        $transaction->status = 0;
         $transaction->save();
-        return redirect('/')->with('success', 'Payment Success');
+        return redirect('/profil/transaksi')->with('success', 'Pembelian Berhasil, Upload Bukti untuk dikonfirmasi');
     }
 
     public function getUserTransaction() {
@@ -68,11 +68,28 @@ class TransactionController extends Controller
     }
 
     public function eventUser(Event $event) {
+        if(Auth::user()->id != $event->user_id){
+            abort('404');
+        }
+
         $transactions = Transaction::where('event_id', $event->id)->paginate(10);
-        return view('transaction_history_event',[
+        return view('event_user_list',[
             'title' => 'Riwayat Transaksi',
             'transactions' => $transactions,
             'event' => $event,
         ]);
+        // dd($transactions);
+    }
+
+    public function acceptTicket(Transaction $transaction) {
+        $transaction->status = 1;
+        $transaction->save();
+        return redirect()->back()->with('success', 'Tiket Diterima');
+    }
+
+    public function rejectTicket(Transaction $transaction) {
+        $transaction->status = 2;
+        $transaction->save();
+        return redirect()->back()->with('success', 'Tiket Ditolak');
     }
 }

@@ -68,7 +68,7 @@
           @endif
         </td>
         <td>
-          @if($transaction->img_path == NULL)
+          @if($transaction->img_path == NULL && $transaction->status == 0)
           <form action="/profil/transaksi/{{ $transaction->id }}/upload" method="post" enctype="multipart/form-data">
             @csrf
             <div class="custom-file">
@@ -82,7 +82,7 @@
             </div>
             <button type="submit" class="btn btn-primary mt-2">Upload</button>
           </form>
-          @else
+          @elseif($transaction->img_path != NULL || $transaction->status == 0)
             <span class="badge bg-info">Sudah Upload</span>
           @endif
         </td>

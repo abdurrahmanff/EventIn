@@ -24,11 +24,11 @@
               <td>{{ $event->schedule }}</td>
               <td>
                 @if( $event->status  == 0)
-                <span class="badge bg-warning">Belum Dikonfirmasi</span>
+                <span class="badge bg-warning">Event Belum Dikonfirmasi Admin</span>
                 @elseif( $event->status  == 1)
-                <span class="badge bg-success">Sudah Dikonfirmasi</span>
+                <span class="badge bg-success">Event Sudah Dikonfirmasi Admin</span>
                 @elseif( $event->status  == 2)
-                <span class="badge bg-danger">Ditolak</span>
+                <span class="badge bg-danger">Event Ditolak Admin</span>
                 @endif
               </td>
               <td>
